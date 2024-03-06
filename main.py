@@ -14,8 +14,8 @@ class TelegramMessage(BaseModel):
 
 @app.post("/send/")
 def send_message(data: TelegramMessage):
-    bot = telebot.TeleBot(data.bottoken)
     try:
+        bot = telebot.TeleBot(data.bottoken)
         bot.send_message(data.chatid, data.message, parse_mode="Markdown")
         return {"status": "Message sent successfully"}
     except ApiTelegramException as error:
